@@ -18,7 +18,7 @@ public class SepButton extends MyButton{
     public void onClick(View v) {
         super.onClick(v);
 
-        validate(sign);
+        validate(sign, tvInput);
     }
 
 }

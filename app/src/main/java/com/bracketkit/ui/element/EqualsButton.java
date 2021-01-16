@@ -35,9 +35,9 @@ public class EqualsButton extends MyButton{
         ArrayList<String> allStrings = new ArrayList<>();
         String lastString;
 
-        //signs = new ArrayList<>();
-        //numbers = new ArrayList<>();
-        //warningControl = true;
+        signs = new ArrayList<>();
+        numbers = new ArrayList<>();
+        warningControl = true;
         String val = "";
         boolean consists = false;
 
