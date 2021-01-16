@@ -25,7 +25,7 @@ public abstract class MyButton implements View.OnClickListener {
     public void onClick(View v) {
     }
 
-    protected void validate(String sign, TextView v){
+    protected void validate(String sign){
 
         if(tvInput.length() != 0) {
             lastSign = tvInput.getText().toString();

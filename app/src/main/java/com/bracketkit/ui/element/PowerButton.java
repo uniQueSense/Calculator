@@ -18,7 +18,7 @@ public class PowerButton extends MyButton{
     public void onClick(View v) {
         super.onClick(v);
 
-        validate(sign, tvInput);
+        validate(sign);
 
        // tvInput.setText(tvInput.getText() + "^");
     }

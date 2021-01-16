@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         tvInput = findViewById(R.id.input_screen);
         tvOutput = findViewById(R.id.output_screen);
 
+        tvInput.setText("0");
+
         btnPlus = new PlusButton(findViewById(R.id.plus), chars,  tvInput);
         btnMinus = new MinusButton(findViewById(R.id.minus), chars,  tvInput);
         btnMul = new MulButton(findViewById(R.id.multiplication), chars,  tvInput);
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         btn7 = new NumberButton(findViewById(R.id.seven), chars, tvInput, tvOutput, converterActive, decimalActive);
         btn8 = new NumberButton(findViewById(R.id.eight), chars, tvInput, tvOutput, converterActive, decimalActive);
         btn9 = new NumberButton(findViewById(R.id.nine), chars, tvInput, tvOutput, converterActive, decimalActive);
-
 
         menuButton.setOnClickListener(new View.OnClickListener() {
 
@@ -169,5 +170,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

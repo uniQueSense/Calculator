@@ -21,9 +21,6 @@ public class DivideButton extends MyButton {
     public void onClick(View v) {
         super.onClick(v);
 
-        validate(sign, tvInput);
-        //tvInput.setText(tvInput.getText() + "/");
+        validate(sign);
     }
-
-
 }
