@@ -95,10 +95,15 @@ public class EqualsButton extends MyButton{
             } else signs.add(allStrings.get(i));
         }
 
-        if (warningControl)
-            tvOutput.setText(Double.toString(sequenceMathematicalOperation(numbers, signs)));
+        if (warningControl) {
+            output = sequenceMathematicalOperation(numbers, signs);
+            roundOff = (double) Math.round(output * 100000) / 100000;
+            output = roundOff;
+            tvOutput.setText(Double.toString(output));
+        }
         else
             tvOutput.setText("Operation error!");
+
     }
 
 
