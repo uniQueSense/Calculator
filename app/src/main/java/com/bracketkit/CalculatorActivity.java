@@ -3,7 +3,6 @@ package com.bracketkit;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -116,39 +115,39 @@ public class CalculatorActivity extends AppCompatActivity {
         });
 
 
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Log.wtf("XX", "pos x: "+event.getRawX());
-                //Log.wtf("XX", "pos y: "+event.getRawY());
-                float x = event.getRawX();
-                //float y = event.getRawY();
-
-                switch(event.getAction()) {
-
-                    case MotionEvent.ACTION_DOWN:
-
-                        //Log.d("XX", "nacisniecie+ "+ x);
-                        //Log.d("XX", "nacisniecie");
-
-
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-
-                          //Log.wtf("XX", "ujecie:  ");
-
-
-
-                        break;
-                    case MotionEvent.ACTION_UP:
-
-                        //Log.d("XX", "puszczenie+ "+ x);
-                        break;
-                }
-
-                return false;
-            }
-        });
+//        container.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                //Log.wtf("XX", "pos x: "+event.getRawX());
+//                //Log.wtf("XX", "pos y: "+event.getRawY());
+//                float x = event.getRawX();
+//                //float y = event.getRawY();
+//
+//                switch(event.getAction()) {
+//
+//                    case MotionEvent.ACTION_DOWN:
+//
+//                        //Log.d("XX", "nacisniecie+ "+ x);
+//                        //Log.d("XX", "nacisniecie");
+//
+//
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//
+//                          //Log.wtf("XX", "ujecie:  ");
+//
+//
+//
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//
+//                        //Log.d("XX", "puszczenie+ "+ x);
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 
         calculatorButton.setOnClickListener(new View.OnClickListener() {
             @Override

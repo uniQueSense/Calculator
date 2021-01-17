@@ -18,10 +18,41 @@ public class SepButton extends MyButton{
     public void onClick(View v) {
         super.onClick(v);
 
-        if (true)
-
+        if (fun())
             validate(sign, tvInput);
     }
 
+    public boolean fun () {
+        char[] operations = new char[] {'+','-', '/', '*', '^', '%', '.'};
+        char[] lastChar = new char[50];
+        ArrayList<Character> last = new ArrayList<>();
+        char checkedChar;
+        String text = tvInput.getText().toString();
 
+        for (int i = 0; i < tvInput.length(); i++) {
+            checkedChar = text.charAt(i);
+
+            for (int j = 0; j < operations.length; j++) {
+
+                if (checkedChar == operations[j]) {
+                    last.add(checkedChar);
+                    System.out.println(last);
+                    break;
+                }
+            }
+        }
+
+        if (last.size() == 1) {
+            if (last.get(last.size() - 1).equals('.')){
+                return false;
+            }
+        }
+        if (last.size() > 1) {
+            if (last.get(last.size() - 1).equals('.') || last.get(last.size() - 2).equals('.')){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

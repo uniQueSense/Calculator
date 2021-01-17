@@ -41,7 +41,7 @@ public class EqualsButton extends MyButton{
         consists = false;
         signs = new ArrayList<>();
         numbers = new ArrayList<>();
-        char[] operations = new char[]{'+','-', '/', '*', 'm', '^', '%'};
+        char[] operations = new char[]{'+','-', '/', '*', '^', '%'};
 
         for (int i = 0; i < text.length(); i++) {
             char checkedChar = text.charAt(i);
@@ -54,13 +54,13 @@ public class EqualsButton extends MyButton{
                 }
             }
 
-            for (char operation :
-                    operations) {
-                if (checkedChar == operation) {
-                    consists = true;
-                    break;
-                }
-            }
+//            for (char operation :
+//                    operations) {
+//                if (checkedChar == operation) {
+//                    consists = true;
+//                    break;
+//                }
+//            }
 
             if (consists) {
                 allStrings.add(val);
@@ -91,11 +91,11 @@ public class EqualsButton extends MyButton{
         for (int i = 0; i < allStrings.size(); i++) {
 
             if (i % 2 == 0) {
-                if (allStrings.get(i).length() > 14) {
-                    numberLimit = false;
-                }
                 number = Double.parseDouble(allStrings.get(i));
                 numbers.add(number);
+                if (number >= pow(10,13)) {
+                    numberLimit = false;
+                }
             } else signs.add(allStrings.get(i));
         }
 
