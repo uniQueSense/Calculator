@@ -1,19 +1,15 @@
 package com.bracketkit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bracketkit.ui.element.BackButton;
 import com.bracketkit.ui.element.BinButton;
@@ -108,13 +104,11 @@ public class ConverterActivity extends AppCompatActivity {
                 if(!activeMenu){
                     params.leftMargin = 0;
                     menuLayout.setLayoutParams(params);
-
                     activeMenu = true;
                 }
                 else {
-                    params.leftMargin = -650;
+                    params.leftMargin = -600;
                     menuLayout.setLayoutParams(params);
-
                     activeMenu = false;
                 }
             }
@@ -125,7 +119,7 @@ public class ConverterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ConverterActivity.this,MainActivity.class);
+                Intent intent = new Intent(ConverterActivity.this, CalculatorActivity.class);
                 startActivity(intent);
                 finish();
             }
