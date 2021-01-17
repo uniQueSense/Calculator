@@ -17,8 +17,7 @@ public class BackButton extends MyButton{
     public void onClick(View v) {
         super.onClick(v);
 
-
-        if(tvInput.getText() != "0") {
+        if (tvInput.getText() != "0") {
             newInput = tvInput.getText().toString();
             newInput = newInput.substring(0, newInput.length() - 1);
             tvInput.setText(newInput);

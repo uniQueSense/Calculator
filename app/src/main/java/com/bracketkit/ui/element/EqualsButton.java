@@ -15,6 +15,8 @@ public class EqualsButton extends MyButton{
     private double number;
     private double operation;
     private boolean warningControl;
+    private boolean numberLimit;
+    boolean consists;
     private ArrayList<String> signs;
     private ArrayList<Double> numbers;
 
@@ -31,15 +33,15 @@ public class EqualsButton extends MyButton{
     }
 
     protected void calculate(String text) {
-        char[] operations = new char[]{'+','-', '/', '*', 'm', '^', '%'};
         ArrayList<String> allStrings = new ArrayList<>();
+        String val = "";
         String lastString;
-
+        numberLimit = true;
+        warningControl = true;
+        consists = false;
         signs = new ArrayList<>();
         numbers = new ArrayList<>();
-        warningControl = true;
-        String val = "";
-        boolean consists = false;
+        char[] operations = new char[]{'+','-', '/', '*', 'm', '^', '%'};
 
         for (int i = 0; i < text.length(); i++) {
             char checkedChar = text.charAt(i);
@@ -81,7 +83,6 @@ public class EqualsButton extends MyButton{
                 newInput = tvInput.getText().toString();
                 newInput = newInput.substring(0, newInput.length() - 1);
                 tvInput.setText(newInput);
-
                 allStrings.remove(allStrings.size() - 1);
             }
         }
@@ -90,6 +91,9 @@ public class EqualsButton extends MyButton{
         for (int i = 0; i < allStrings.size(); i++) {
 
             if (i % 2 == 0) {
+                if (allStrings.get(i).length() > 14) {
+                    numberLimit = false;
+                }
                 number = Double.parseDouble(allStrings.get(i));
                 numbers.add(number);
             } else signs.add(allStrings.get(i));
@@ -97,9 +101,12 @@ public class EqualsButton extends MyButton{
 
         if (warningControl) {
             output = sequenceMathematicalOperation(numbers, signs);
-            roundOff = (double) Math.round(output * 100000) / 100000;
-            output = roundOff;
-            tvOutput.setText(Double.toString(output));
+            if (output <= pow(10,13) && numberLimit){
+                roundOff = (double) Math.round(output * 100000) / 100000;
+                output = roundOff;
+                tvOutput.setText(Double.toString(output));
+            } else tvOutput.setText("Too large number!");
+
         }
         else
             tvOutput.setText("Operation error!");

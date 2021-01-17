@@ -43,8 +43,5 @@ public abstract class MyButton implements View.OnClickListener {
 
         }
         else tvInput.setText("0" + sign);
-
-
-
     }
 }

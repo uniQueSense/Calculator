@@ -57,14 +57,17 @@ public class ConverterActivity extends AppCompatActivity {
         activeMenu = false;
         converterActive = true;
 
-
         viewFlipper = findViewById(R.id.viev_flip);
 
         tvInput = findViewById(R.id.tvInput);
         tvOutput = findViewById(R.id.tvOutput);
 
+        tvInput.setText("0");
+
         tvInputt = findViewById(R.id.tvInputt);
         tvOutputt = findViewById(R.id.tvOutputt);
+
+        tvInputt.setText("0");
 
         menuButton = findViewById(R.id.menu_button);
         menuLayout = findViewById(R.id.menu_block);
