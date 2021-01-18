@@ -33,10 +33,11 @@ public abstract class MyButton implements View.OnClickListener {
         if(tvInput.length() != 0) {
             lastSign = tvInput.getText().toString();
             lastSign = lastSign.substring(lastSign.length() - 1);
-
             if (lastSign.equals("+") || lastSign.equals("-") || lastSign.equals("*") || lastSign.equals("/")
-                    || lastSign.equals("%") || lastSign.equals("m")
-                    || lastSign.equals(".") || lastSign.equals("^")) {
+                    || lastSign.equals("%") || lastSign.equals("^")) {
+                if(sign.equals(".")) {
+                    tvInput.setText(tvInput.getText()+"0" + sign);
+                }
                 newInput = tvInput.getText().toString();
                 newInput = newInput.substring(0, newInput.length() - 1);
                 tvInput.setText(newInput + sign);

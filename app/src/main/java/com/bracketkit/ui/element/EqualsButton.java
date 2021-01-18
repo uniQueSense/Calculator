@@ -127,7 +127,7 @@ public class EqualsButton extends MyButton{
         return list_0.get(0);
     }
 
-    private int exponentiationAndModulo(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+    protected int exponentiationAndModulo(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
 
         switch (list_1.get(i).charAt(0)) {
             case '^':
@@ -139,6 +139,10 @@ public class EqualsButton extends MyButton{
                 return i - 1;
 
             case '%':
+                if (list_0.get(i + 1).equals(0.0)) {
+                    warningControl = false;
+                    return list_1.size();
+                }
                 operation = list_0.get(i) % list_0.get(i + 1);
                 list_1.remove(i);
                 list_0.remove(i + 1);
@@ -149,7 +153,7 @@ public class EqualsButton extends MyButton{
         return i;
     }
 
-    private int multiplicationAndDivision (ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+    protected int multiplicationAndDivision (ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
 
         switch (list_1.get(i).charAt(0)) {
             case '*':
@@ -195,69 +199,3 @@ public class EqualsButton extends MyButton{
         return i;
     }
 }
-
-
-    /**
-     * oparte na stacku bez brania pod uwagę kolejność wykonywania działań
-     * */
-
-//    public void calculate(ArrayList<Double> list_0, ArrayList<String> list_1) {
-//
-//        Stack<Double> stack_0 = new Stack();
-//        Collections.reverse(list_0);
-//        stack_0.addAll(list_0);
-//        output = 0.0;
-//        warningControl = true;
-//
-//        for (int i =0; i < list_1.size(); i++){
-//            String sign = list_1.get(i);
-//            List<Double> args = new ArrayList<>();
-//            args.add(stack_0.pop());
-//            args.add(stack_0.pop());
-//
-//
-//            switch (sign) {
-//                case "+":
-//                    output = Double.sum(args.get(0), args.get(1));
-//                    stack_0.push(output);
-//                    break;
-//                case "-":
-//                    output = Double.sum(args.get(0), -args.get(1));
-//                    stack_0.push(output)
-//                    ;
-//                    break;
-//                case "*":
-//                    output = args.get(0) * args.get(1);
-//                    stack_0.push(output);
-//                    break;
-//                case "/":
-//                    if (args.get(1).equals(0.0)) {
-//                        warningControl = false;
-//                    }
-//                    output = args.get(0) / args.get(1);
-//                    stack_0.push(output);
-//                    break;
-//                case "^":
-//                    output = pow(args.get(0), args.get(1));
-//                    stack_0.push(output);
-//                    break;
-//                case "%":
-//                    output = args.get(0) % args.get(1);
-//                    stack_0.push(output);
-//                    break;
-//                default:
-//                    System.out.println("error_EqualsButton");
-//            }
-//        }
-//        if (list_1.size() == 0) {
-//            output = list_0.get(0);
-//        }
-//
-//        System.out.println(warningControl);
-//
-//        if (warningControl) {
-//            roundOff = (double) Math.round(output * 100000) / 100000;
-//            output= roundOff;
-//            tvOutput.setText(Double.toString(output));
-//        } else tvOutput.setText("Operation error!");
-//    }
