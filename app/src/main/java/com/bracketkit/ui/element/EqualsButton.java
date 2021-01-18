@@ -108,7 +108,7 @@ public class EqualsButton extends MyButton{
 
 
     /* z uwzględnioną kolejnością wykonywania dzaiałń */
-    private double sequenceMathematicalOperation (ArrayList<Double> list_0, ArrayList<String> list_1) {
+    protected double sequenceMathematicalOperation (ArrayList<Double> list_0, ArrayList<String> list_1) {
 
         for (int i = 1; i <= 3; i++) {
             for (int j = 0; j < list_1.size(); j++) {

@@ -31,13 +31,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Test1 {
+public class CorrectResultTest {
 
     @Rule
     public ActivityTestRule<CalculatorActivity> mActivityTestRule = new ActivityTestRule<>(CalculatorActivity.class);
 
     @Test
-    public void test1() {
+    public void correctResultTest() {
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.two), withText("2"),
                         childAtPosition(
