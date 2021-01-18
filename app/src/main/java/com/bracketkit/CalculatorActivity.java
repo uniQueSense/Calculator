@@ -66,17 +66,17 @@ public class CalculatorActivity extends AppCompatActivity {
 
         tvInput.setText("0");
 
-        btnPlus = new PlusButton(findViewById(R.id.plus), chars,  tvInput);
-        btnMinus = new MinusButton(findViewById(R.id.minus), chars,  tvInput);
-        btnMul = new MulButton(findViewById(R.id.multiplication), chars,  tvInput);
-        btnDiv = new DivideButton(findViewById(R.id.division), chars,  tvInput);
-        btnPower = new PowerButton(findViewById(R.id.power), chars,  tvInput);
-        btnMod = new ModButton(findViewById(R.id.modulo), chars,  tvInput);
-        btnSeparator = new SepButton(findViewById(R.id.decimal_separator), chars,  tvInput);
+        btnPlus = new PlusButton(findViewById(R.id.plus), chars, tvInput);
+        btnMinus = new MinusButton(findViewById(R.id.minus), chars, tvInput);
+        btnMul = new MulButton(findViewById(R.id.multiplication), chars, tvInput);
+        btnDiv = new DivideButton(findViewById(R.id.division), chars, tvInput);
+        btnPower = new PowerButton(findViewById(R.id.power), chars, tvInput);
+        btnMod = new ModButton(findViewById(R.id.modulo), chars, tvInput);
+        btnSeparator = new SepButton(findViewById(R.id.decimal_separator), chars, tvInput);
 
-        btnBackspace = new BackButton(findViewById(R.id.backspace), chars,  tvInput);
-        btnEquals = new EqualsButton(findViewById(R.id.equals), chars,  tvInput, tvOutput);
-        btnClear = new ClearButton(findViewById(R.id.clear), chars,  tvInput, tvOutput);
+        btnBackspace = new BackButton(findViewById(R.id.backspace), chars, tvInput);
+        btnEquals = new EqualsButton(findViewById(R.id.equals), chars, tvInput, tvOutput);
+        btnClear = new ClearButton(findViewById(R.id.clear), chars, tvInput, tvOutput);
 
         btn0 = new NumberButton(findViewById(R.id.zero), chars, tvInput, tvOutput, converterActive, decimalActive);
         btn1 = new NumberButton(findViewById(R.id.one), chars, tvInput, tvOutput, converterActive, decimalActive);
@@ -97,14 +97,13 @@ public class CalculatorActivity extends AppCompatActivity {
                 int height = menuLayout.getHeight();
 
 
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
-                if(!activeMenu){
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+                if (!activeMenu) {
                     params.leftMargin = 0;
                     menuLayout.setLayoutParams(params);
 
                     activeMenu = true;
-                }
-                else {
+                } else {
                     params.leftMargin = -650;
                     menuLayout.setLayoutParams(params);
 
@@ -161,7 +160,7 @@ public class CalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(CalculatorActivity.this,ConverterActivity.class);
+                Intent intent = new Intent(CalculatorActivity.this, ConverterActivity.class);
 
                 startActivity(intent);
                 onEnterAnimationComplete();

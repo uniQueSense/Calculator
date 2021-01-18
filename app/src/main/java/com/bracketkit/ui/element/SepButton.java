@@ -22,15 +22,8 @@ public class SepButton extends MyButton {
             validate(sign, tvInput);
     }
 
-    /*
-            tvinput.split(operatory)  iteracja ou do najblizszego operatora
-            //42.8982+54*5442.0
-            [42.8982, 54, 5442.0]
-            czy ostatnia liczba ma kropkę
-     */
     public boolean fun() {
         char[] operations = new char[]{'+', '-', '/', '*', '^', '%', '.'};
-        char[] lastChar = new char[50];
         ArrayList<Character> last = new ArrayList<>();
         char checkedChar;
         String text = tvInput.getText().toString();
@@ -48,17 +41,6 @@ public class SepButton extends MyButton {
             }
         }
 
-//        if (last.size() == 1) {
-//            if (last.get(last.size() - 1).equals('.')) {
-//                return false;
-//            }
-//        }
-//        if (last.size() > 1) {
-//            if (last.get(last.size() - 1).equals('.') || last.get(last.size() - 2).equals('.')) {
-//                return false;
-//            }
-//        }
-        //return true;
         if( ! last.isEmpty()){
             if (last.get(last.size() - 1).equals('.')) {
                 return false;
