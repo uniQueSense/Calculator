@@ -107,7 +107,7 @@ public class ConverterActivity extends AppCompatActivity {
                     activeMenu = true;
                 }
                 else {
-                    params.leftMargin = -600;
+                    params.leftMargin = -650;
                     menuLayout.setLayoutParams(params);
                     activeMenu = false;
                 }
