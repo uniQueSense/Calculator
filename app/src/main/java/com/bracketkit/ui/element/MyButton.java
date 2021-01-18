@@ -13,6 +13,9 @@ public abstract class MyButton implements View.OnClickListener {
     protected TextView tvInput;
     protected String newInput, lastSign;
 
+    public MyButton() {
+    }
+
     public MyButton(Button button, ArrayList<Character> chars, TextView tvInput) {
         this.button = button;
         this.chars = chars;

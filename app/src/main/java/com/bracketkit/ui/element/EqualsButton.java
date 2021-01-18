@@ -20,6 +20,9 @@ public class EqualsButton extends MyButton{
     private ArrayList<String> signs;
     private ArrayList<Double> numbers;
 
+    public EqualsButton() { /* używane do testów */
+    }
+
     public EqualsButton(Button button, ArrayList<Character> chars, TextView tvInput, TextView tvOutput) {
         super(button, chars, tvInput);
         this.tvOutput = tvOutput;
@@ -53,14 +56,6 @@ public class EqualsButton extends MyButton{
                     break;
                 }
             }
-
-//            for (char operation :
-//                    operations) {
-//                if (checkedChar == operation) {
-//                    consists = true;
-//                    break;
-//                }
-//            }
 
             if (consists) {
                 allStrings.add(val);
@@ -99,8 +94,8 @@ public class EqualsButton extends MyButton{
             } else signs.add(allStrings.get(i));
         }
 
+        output = sequenceMathematicalOperation(numbers, signs);
         if (warningControl) {
-            output = sequenceMathematicalOperation(numbers, signs);
             if (output <= pow(10,13) && numberLimit){
                 roundOff = (double) Math.round(output * 100000) / 100000;
                 output = roundOff;
@@ -108,9 +103,7 @@ public class EqualsButton extends MyButton{
             } else tvOutput.setText("Too large number!");
 
         }
-        else
-            tvOutput.setText("Operation error!");
-
+        else tvOutput.setText("Operation error!");
     }
 
 
@@ -181,7 +174,7 @@ public class EqualsButton extends MyButton{
         return i;
     }
 
-    private int addAndSubtraction(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+    protected int addAndSubtraction(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
 
         switch (list_1.get(i).charAt(0)) {
             case '+':
@@ -201,7 +194,6 @@ public class EqualsButton extends MyButton{
         }
         return i;
     }
-
 }
 
 
