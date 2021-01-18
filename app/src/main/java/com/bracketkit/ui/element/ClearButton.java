@@ -18,7 +18,7 @@ public class ClearButton extends MyButton{
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        tvInput.setText("");
+        tvInput.setText("0");
         tvOutput.setText("");
     }
 }

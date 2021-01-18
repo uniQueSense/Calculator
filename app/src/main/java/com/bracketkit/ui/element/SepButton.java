@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class SepButton extends MyButton{
+public class SepButton extends MyButton {
 
     private String sign = ".";
 
@@ -18,8 +18,34 @@ public class SepButton extends MyButton{
     public void onClick(View v) {
         super.onClick(v);
 
-        validate(sign, tvInput);
-        //tvInput.setText(tvInput.getText() + ".");
+        if (fun())
+            validate(sign, tvInput);
     }
 
+    public boolean fun() {
+        char[] operations = new char[]{'+', '-', '/', '*', '^', '%', '.'};
+        ArrayList<Character> last = new ArrayList<>();
+        char checkedChar;
+        String text = tvInput.getText().toString();
+
+        for (int i = 0; i < tvInput.length(); i++) {
+            checkedChar = text.charAt(i);
+
+            for (int j = 0; j < operations.length; j++) {
+
+                if (checkedChar == operations[j]) {
+                    last.add(checkedChar);
+                    System.out.println(last);
+                    break;
+                }
+            }
+        }
+
+        if( ! last.isEmpty()){
+            if (last.get(last.size() - 1).equals('.')) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -1,19 +1,15 @@
 package com.bracketkit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bracketkit.ui.element.BackButton;
 import com.bracketkit.ui.element.BinButton;
@@ -57,14 +53,17 @@ public class ConverterActivity extends AppCompatActivity {
         activeMenu = false;
         converterActive = true;
 
-
         viewFlipper = findViewById(R.id.viev_flip);
 
         tvInput = findViewById(R.id.tvInput);
         tvOutput = findViewById(R.id.tvOutput);
 
+        tvInput.setText("0");
+
         tvInputt = findViewById(R.id.tvInputt);
         tvOutputt = findViewById(R.id.tvOutputt);
+
+        tvInputt.setText("0");
 
         menuButton = findViewById(R.id.menu_button);
         menuLayout = findViewById(R.id.menu_block);
@@ -105,13 +104,11 @@ public class ConverterActivity extends AppCompatActivity {
                 if(!activeMenu){
                     params.leftMargin = 0;
                     menuLayout.setLayoutParams(params);
-
                     activeMenu = true;
                 }
                 else {
                     params.leftMargin = -650;
                     menuLayout.setLayoutParams(params);
-
                     activeMenu = false;
                 }
             }
@@ -122,7 +119,7 @@ public class ConverterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ConverterActivity.this,MainActivity.class);
+                Intent intent = new Intent(ConverterActivity.this, CalculatorActivity.class);
                 startActivity(intent);
                 finish();
             }

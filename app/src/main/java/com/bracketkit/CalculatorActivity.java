@@ -1,34 +1,33 @@
 package com.bracketkit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bracketkit.ui.element.BackButton;
+import com.bracketkit.ui.element.ClearButton;
+import com.bracketkit.ui.element.DivideButton;
 import com.bracketkit.ui.element.EqualsButton;
 import com.bracketkit.ui.element.MinusButton;
 import com.bracketkit.ui.element.ModButton;
 import com.bracketkit.ui.element.MulButton;
+import com.bracketkit.ui.element.MyButton;
 import com.bracketkit.ui.element.NumberButton;
 import com.bracketkit.ui.element.PlusButton;
-import com.bracketkit.ui.element.ClearButton;
-import com.bracketkit.ui.element.DivideButton;
-import com.bracketkit.ui.element.MyButton;
 import com.bracketkit.ui.element.PowerButton;
 import com.bracketkit.ui.element.SepButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity {
 
     private TextView tvInput, tvOutput;
     private MyButton btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_calculator);
         getSupportActionBar().hide();
 
         activeMenu = false;
@@ -65,17 +64,19 @@ public class MainActivity extends AppCompatActivity {
         tvInput = findViewById(R.id.input_screen);
         tvOutput = findViewById(R.id.output_screen);
 
-        btnPlus = new PlusButton(findViewById(R.id.plus), chars,  tvInput);
-        btnMinus = new MinusButton(findViewById(R.id.minus), chars,  tvInput);
-        btnMul = new MulButton(findViewById(R.id.multiplication), chars,  tvInput);
-        btnDiv = new DivideButton(findViewById(R.id.division), chars,  tvInput);
-        btnPower = new PowerButton(findViewById(R.id.power), chars,  tvInput);
-        btnMod = new ModButton(findViewById(R.id.modulo), chars,  tvInput);
-        btnSeparator = new SepButton(findViewById(R.id.decimal_separator), chars,  tvInput);
+        tvInput.setText("0");
 
-        btnBackspace = new BackButton(findViewById(R.id.backspace), chars,  tvInput);
-        btnEquals = new EqualsButton(findViewById(R.id.equals), chars,  tvInput, tvOutput);
-        btnClear = new ClearButton(findViewById(R.id.clear), chars,  tvInput, tvOutput);
+        btnPlus = new PlusButton(findViewById(R.id.plus), chars, tvInput);
+        btnMinus = new MinusButton(findViewById(R.id.minus), chars, tvInput);
+        btnMul = new MulButton(findViewById(R.id.multiplication), chars, tvInput);
+        btnDiv = new DivideButton(findViewById(R.id.division), chars, tvInput);
+        btnPower = new PowerButton(findViewById(R.id.power), chars, tvInput);
+        btnMod = new ModButton(findViewById(R.id.modulo), chars, tvInput);
+        btnSeparator = new SepButton(findViewById(R.id.decimal_separator), chars, tvInput);
+
+        btnBackspace = new BackButton(findViewById(R.id.backspace), chars, tvInput);
+        btnEquals = new EqualsButton(findViewById(R.id.equals), chars, tvInput, tvOutput);
+        btnClear = new ClearButton(findViewById(R.id.clear), chars, tvInput, tvOutput);
 
         btn0 = new NumberButton(findViewById(R.id.zero), chars, tvInput, tvOutput, converterActive, decimalActive);
         btn1 = new NumberButton(findViewById(R.id.one), chars, tvInput, tvOutput, converterActive, decimalActive);
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         btn8 = new NumberButton(findViewById(R.id.eight), chars, tvInput, tvOutput, converterActive, decimalActive);
         btn9 = new NumberButton(findViewById(R.id.nine), chars, tvInput, tvOutput, converterActive, decimalActive);
 
-
         menuButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -97,14 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 int height = menuLayout.getHeight();
 
 
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width,height);
-                if(!activeMenu){
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+                if (!activeMenu) {
                     params.leftMargin = 0;
                     menuLayout.setLayoutParams(params);
 
                     activeMenu = true;
-                }
-                else {
+                } else {
                     params.leftMargin = -650;
                     menuLayout.setLayoutParams(params);
 
@@ -114,39 +113,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Log.wtf("XX", "pos x: "+event.getRawX());
-                //Log.wtf("XX", "pos y: "+event.getRawY());
-                float x = event.getRawX();
-                //float y = event.getRawY();
 
-                switch(event.getAction()) {
-
-                    case MotionEvent.ACTION_DOWN:
-
-                        //Log.d("XX", "nacisniecie+ "+ x);
-                        //Log.d("XX", "nacisniecie");
-
-
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-
-                          //Log.wtf("XX", "ujecie:  ");
-
-
-
-                        break;
-                    case MotionEvent.ACTION_UP:
-
-                        //Log.d("XX", "puszczenie+ "+ x);
-                        break;
-                }
-
-                return false;
-            }
-        });
+//        container.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                //Log.wtf("XX", "pos x: "+event.getRawX());
+//                //Log.wtf("XX", "pos y: "+event.getRawY());
+//                float x = event.getRawX();
+//                //float y = event.getRawY();
+//
+//                switch(event.getAction()) {
+//
+//                    case MotionEvent.ACTION_DOWN:
+//
+//                        //Log.d("XX", "nacisniecie+ "+ x);
+//                        //Log.d("XX", "nacisniecie");
+//
+//
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//
+//                          //Log.wtf("XX", "ujecie:  ");
+//
+//
+//
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//
+//                        //Log.d("XX", "puszczenie+ "+ x);
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 
         calculatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this,ConverterActivity.class);
+                Intent intent = new Intent(CalculatorActivity.this, ConverterActivity.class);
 
                 startActivity(intent);
                 onEnterAnimationComplete();
@@ -169,5 +169,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

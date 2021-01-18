@@ -21,7 +21,5 @@ public class PlusButton extends MyButton{
 
         validate(sign, tvInput);
 
-        //tvInput.setText(tvInput.getText() + sign);
     }
-
 }

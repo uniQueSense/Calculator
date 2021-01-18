@@ -1,20 +1,28 @@
 package com.bracketkit.ui.element;
 
-import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+
+import static java.lang.Math.pow;
 
 public class EqualsButton extends MyButton{
     private TextView tvOutput;
+    private double roundOff;
+    private double output;
+    private double number;
+    private double operation;
+    private boolean warningControl;
+    private boolean numberLimit;
+    boolean consists;
+    private ArrayList<String> signs;
+    private ArrayList<Double> numbers;
+
+    public EqualsButton() { /* używane do testów */
+    }
+
     public EqualsButton(Button button, ArrayList<Character> chars, TextView tvInput, TextView tvOutput) {
         super(button, chars, tvInput);
         this.tvOutput = tvOutput;
@@ -28,15 +36,15 @@ public class EqualsButton extends MyButton{
     }
 
     protected void calculate(String text) {
-        char[] operations = new char[]{'+','-', '/', '*', 'm', '^', '%'};
         ArrayList<String> allStrings = new ArrayList<>();
-        ArrayList<String> signs = new ArrayList<>();
-        ArrayList<Double> numbers = new ArrayList<>();
-        String lastString = new String();
-        double number;
-
         String val = "";
-        boolean consists = false;
+        String lastString;
+        numberLimit = true;
+        warningControl = true;
+        consists = false;
+        signs = new ArrayList<>();
+        numbers = new ArrayList<>();
+        char[] operations = new char[]{'+','-', '/', '*', '^', '%'};
 
         for (int i = 0; i < text.length(); i++) {
             char checkedChar = text.charAt(i);
@@ -49,17 +57,11 @@ public class EqualsButton extends MyButton{
                 }
             }
 
-            for (char operation :
-                    operations) {
-                if(checkedChar == operation)
-                    consists = true;
-            }
-
-            if(consists){
+            if (consists) {
                 allStrings.add(val);
                 allStrings.add(operations[j]+"");
                 val = "";
-            }else{
+            } else {
                 val += checkedChar;
             }
 
@@ -67,88 +69,133 @@ public class EqualsButton extends MyButton{
         }
         if(!val.equals(""))
             allStrings.add(val);
-        
+
         lastString = allStrings.get(allStrings.size() - 1);
-        char s = lastString.charAt(0);
 
-        /**
-         * usuwanie znaku na koncu działania
-         * */
-
-        for (int i = 0; i < operations.length; i++) {
-            if (s == operations[i]){
+        /* usuwanie znaku na koncu działania */
+        for (char operation : operations) {
+            if (lastString.charAt(0) == operation) {
                 newInput = tvInput.getText().toString();
                 newInput = newInput.substring(0, newInput.length() - 1);
                 tvInput.setText(newInput);
-
                 allStrings.remove(allStrings.size() - 1);
             }
         }
-        /**
-         * rozłożenie całej tablicy na dwie osobne
-         * */
 
+        /* rozkładanie na dwie listy */
         for (int i = 0; i < allStrings.size(); i++) {
-            if (i % 2 == 0){
+
+            if (i % 2 == 0) {
                 number = Double.parseDouble(allStrings.get(i));
                 numbers.add(number);
-            }else signs.add(allStrings.get(i));
+                if (number >= pow(10,13)) {
+                    numberLimit = false;
+                }
+            } else signs.add(allStrings.get(i));
         }
 
-        System.out.println(numbers);
-        System.out.println(signs);
+        output = sequenceMathematicalOperation(numbers, signs);
+        if (warningControl) {
+            if (output <= pow(10,13) && numberLimit){
+                roundOff = (double) Math.round(output * 100000) / 100000;
+                output = roundOff;
+                tvOutput.setText(Double.toString(output));
+            } else tvOutput.setText("Too large number!");
 
-        calculate(numbers, signs);
+        }
+        else tvOutput.setText("Operation error!");
     }
 
-    public void calculate(ArrayList<Double> list_0, ArrayList<String> list_1){
 
-        Stack<Double> stack_0 = new Stack();
-        Collections.reverse(list_0);
-        stack_0.addAll(list_0);
-        double output = 0.0;
+    /* z uwzględnioną kolejnością wykonywania dzaiałń */
+    private double sequenceMathematicalOperation (ArrayList<Double> list_0, ArrayList<String> list_1) {
 
-        for (int i =0; i < list_1.size(); i++){
-            String sign = list_1.get(i);
-            List<Double> args = new ArrayList<>();
-            args.add(stack_0.pop());
-            args.add(stack_0.pop());
-
-            switch (sign) {
-                case "+":
-                    output = Double.sum(args.get(0), args.get(1));
-                    stack_0.push(output);
-                    break;
-                case "-":
-                    output = Double.sum(args.get(0), -args.get(1));
-                    stack_0.push(output)
-                    ;
-                    break;
-                case "*":
-                    output = args.get(0) * args.get(1);
-                    stack_0.push(output);
-                    break;
-                case "/":
-                    output = args.get(0) / args.get(1);
-                    stack_0.push(output);
-                    break;
-                case "^":
-                    output = Math.pow(args.get(0), args.get(1));
-                    stack_0.push(output);
-                    break;
-                case "%":
-                    output = args.get(0) % args.get(1);
-                    stack_0.push(output);
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 0; j < list_1.size(); j++) {
+                switch (i) {
+                    case 1:
+                        j = exponentiationAndModulo(list_0, list_1, j);
+                        break;
+                    case 2:
+                        j = multiplicationAndDivision(list_0, list_1, j);
+                        break;
+                    case 3:
+                        j = addAndSubtraction(list_0, list_1, j);
+                }
             }
         }
-        if (list_1.size() == 0) {
-            output = list_0.get(0);
-        }
+        return list_0.get(0);
+    }
 
-     // System.out.println(stack_0);
-        System.out.println(output);
-        double roundOff = (double) Math.round(output * 100000) / 100000;
-        output= roundOff;
-        tvOutput.setText(Double.toString(output));
+    protected int exponentiationAndModulo(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+
+        switch (list_1.get(i).charAt(0)) {
+            case '^':
+                operation = pow(list_0.get(i),list_0.get(i + 1));
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+
+            case '%':
+                if (list_0.get(i + 1).equals(0.0)) {
+                    warningControl = false;
+                    return list_1.size();
+                }
+                operation = list_0.get(i) % list_0.get(i + 1);
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+        }
+        return i;
+    }
+
+    protected int multiplicationAndDivision (ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+
+        switch (list_1.get(i).charAt(0)) {
+            case '*':
+                operation = list_0.get(i) * list_0.get(i + 1);
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+            case '/':
+                if (list_0.get(i + 1).equals(0.0)) {
+                    warningControl = false;
+                    return list_1.size();
+                }
+                operation = list_0.get(i) / list_0.get(i + 1);
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+        }
+        return i;
+    }
+
+    protected int addAndSubtraction(ArrayList<Double> list_0, ArrayList<String> list_1, int i) {
+
+        switch (list_1.get(i).charAt(0)) {
+            case '+':
+                operation = list_0.get(i) + list_0.get(i + 1);
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+            case '-':
+                operation = list_0.get(i) - list_0.get(i + 1);
+                list_1.remove(i);
+                list_0.remove(i + 1);
+                list_0.remove(i);
+                list_0.add(i, operation);
+                return i - 1;
+        }
+        return i;
     }
 }

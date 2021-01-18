@@ -19,7 +19,5 @@ public class MulButton extends MyButton{
         super.onClick(v);
 
         validate(sign, tvInput);
-        //tvInput.setText(tvInput.getText() + "*");
     }
-
 }
